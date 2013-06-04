@@ -1,3 +1,6 @@
+body {
+  padding:0;
+}
 
 * {
   color: #AAA;
@@ -7,11 +10,15 @@ a:hover {
   text-decoration: none;
 }
 
+.actions {
+  padding-left: 3%;
+}
+
 .actions a {
   display:inline-block;
-  font-size:25px;
+  font-size:35px;
   cursor:pointer;
-  padding:40px;
+  padding:5% 2%;
   text-align:center;
 }
 
@@ -35,17 +42,17 @@ a:hover {
 }
 
 ol{
-  padding:0px 40px;
+  padding:0px 2% 0 5%;
   margin:0px;
+  font-size:23px;
 }
 
 li {
-  font-size:23px;
-  line-height: 32px;
+  line-height: 1.2em;
   list-style:none;
   margin-left:0;
-  letter-spacing: -1px;
   text-align: left;
+  font-weight:200;
   /*transition-timing-function: linear;*/
   transition: font-size 200, font-weight 200, height 200, margin 200, line-height 200, letter-spacing 200;
   /*transition: font-weight 100;*/
@@ -57,12 +64,11 @@ li.active {
 }
 
 li.active, li.next {
-  letter-spacing: -7px;
-  font-size: 100px;
-  line-height:100px;
+  /*letter-spacing: -7px;*/
+  /*font-size: 100px;*/
+  line-height:1em;
   font-weight:bold;
-  margin-top:30px;
-  margin-bottom:40px;
+  margin:0.2em 0 0.3em 0;
   
 }
 
@@ -83,17 +89,18 @@ li span.part {
 
 .credits {
   position:fixed;
-  left:3;
+  right:3;
   bottom:3;
   color: #DDD;
+  text-align:right;
 }
 
 .credits a {
   transition: color 200;
-  color: #DDD;
+  color: #CCC;
 }
 
 .credits a:hover{
-  color: #AAA;
+  color: #888;
   text-decoration: none;
 }

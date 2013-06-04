@@ -1,5 +1,5 @@
-var workout = 30,
-    rest = 10;
+var workout = 3,
+    rest = 2;
 
 var playingSounds = true;
 
@@ -14,6 +14,8 @@ $(function(){
 
   $('.mute').on('click', mute);
   $('.unMute').on('click', unMute);
+
+  fitText();
   showSoundStatus(false);
 });
 
@@ -61,6 +63,7 @@ function doRest(period){
   $('.drills li').removeClass('active');
   nextExercise = (nextExercise + 1) % $('.drills li').length;
   $($('.drills li')[nextExercise]).addClass('next');
+  fitText();
   workoutTimer = setTimeout(go, (period*1000));
 }
 
@@ -69,7 +72,17 @@ function go(){
   playSound('go');
   $('.drills li').removeClass('next');
   $($('.drills li')[nextExercise]).addClass('active');
+  fitText();
   workoutTimer = setTimeout(doRest, (workout*1000));
+}
+
+function fitText(){
+  $(window).off('resize.fittext orientationchange.fittext');
+  $('.drills li').css({fontSize: 'inherit'});
+  $('.drills li').fitText(3, {minFontSize: '23'});
+  var compress = 1;
+  $('.active').fitText(compress);
+  $('.next').fitText(compress);
 }
 
 function stop(e){
@@ -80,6 +93,7 @@ function stop(e){
   nextExercise = -1;
   $('.drills li').removeClass('next');
   $('.drills li').removeClass('active');
+  fitText();
 }
 
 function playSound(type){
