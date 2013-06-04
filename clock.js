@@ -1,12 +1,9 @@
-var workout = 3,
-    rest = 2;
+var workout = 30,
+    rest = 10;
 
 var playingSounds = true;
 
 $(function(){
-  $('.mute').tooltip();
-  $('.unMute').tooltip();
-
   $('.start').show();
   $('.stop').hide();
   $('.start').on('click', start);
