@@ -14,12 +14,12 @@ a:hover {
   padding-left: 3%;
 }
 
-.actions a {
-  display:inline-block;
-  font-size:35px;
+.actions div {
+  width:42%;
+  padding:5% 2%; 
+  text-align:left;
+  position:fixed;
   cursor:pointer;
-  padding:5% 2%;
-  text-align:center;
 }
 
 .actions .info {
@@ -34,11 +34,22 @@ a:hover {
   display:none;
 }
 
-.actions a.mute, .actions a.unMute {
-  width:100px;
-  height:100px;
+.actions div.start, .actions div.stop {
+  top:0;
+  left:0;
+  padding-left:5%;
+}
+
+.actions div.mute, .actions div.unMute {
   vertical-align: top;
-  float:right;
+  padding-right:5%;
+  text-align:right;
+  top:0;
+  right:0;
+}
+
+.drills {
+  margin-top:2em;
 }
 
 ol{
@@ -61,6 +72,7 @@ li {
 
 li.active {
   color: #af111c;
+  
 }
 
 li.active, li.next {
@@ -89,6 +101,7 @@ li span.part {
 
 .credits {
   position:fixed;
+  font-size:14px;
   right:3;
   bottom:3;
   color: #DDD;

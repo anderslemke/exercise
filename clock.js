@@ -12,8 +12,9 @@ $(function(){
   $('.mute').on('click', mute);
   $('.unMute').on('click', unMute);
 
-  fitText();
+  
   showSoundStatus(false);
+  fitText();
 });
 
 var nextExercise = -1;
@@ -75,6 +76,8 @@ function go(){
 
 function fitText(){
   $(window).off('resize.fittext orientationchange.fittext');
+  $('body').fitText();
+  $('.actions div').fitText(0.5,  {minFontSize: '40'});
   $('.drills li').css({fontSize: 'inherit'});
   $('.drills li').fitText(3, {minFontSize: '23'});
   var compress = 1;
