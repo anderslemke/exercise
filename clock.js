@@ -1,5 +1,5 @@
-var workout = 3,
-    rest = 1;
+var workout = 30,
+    rest = 10;
 
 var playingSounds = true;
 
