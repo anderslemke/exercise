@@ -1,5 +1,5 @@
-var workout = 30,
-    rest = 10;
+var workout = 3,
+    rest = 1;
 
 var playingSounds = true;
 
@@ -93,19 +93,20 @@ function stop(e){
   fitText();
 }
 
+var bell = document.createElement('audio');
+bell.setAttribute('src', 'bell.mp3');
+
+var horn = document.createElement('audio');
+horn.setAttribute('src', 'horn.mp3');
+
+$.get();
+
 function playSound(type){
   if (playingSounds) {
-    var audioElement = document.createElement('audio');
     if (type === 'rest') {
-      audioElement.setAttribute('src', 'bell.mp3');
+      bell.play();
     }else{
-      audioElement.setAttribute('src', 'horn.mp3');
+      horn.play();
     }
-    audioElement.setAttribute('autoplay', 'autoplay');
-    $.get();
-    audioElement.addEventListener("load", function() {
-    audioElement.play();
-    }, true);
-    audioElement.load();
-  } 
+  }
 }
