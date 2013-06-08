@@ -94,8 +94,10 @@ $(document).ready(function () {
   function playSound(type){
     if (playingSounds) {
       if (type === 'rest') {
+        bell.currentTime = 0;
         bell.play();
       }else{
+        horn.currentTime = 0;
         horn.play();
       }
     }
