@@ -3,6 +3,7 @@ $(document).ready(function () {
   rest = 10;
 
   var playingSounds = true;
+  var running = false;
 
   $(function(){
     $('.start').show();
@@ -16,6 +17,18 @@ $(document).ready(function () {
     $('.mute').on('click', mute);
     $('.unMute').on('click', unMute);
 
+    $(document).keyup(function(evt) {
+      if (evt.keyCode == 32) {
+        if (running) {
+          stop(evt);
+        }else{
+          evt.preventDefault();
+          loadAndStart();
+        }
+        
+      }
+    });
+
     showSoundStatus(false);
   });
 
@@ -23,6 +36,7 @@ $(document).ready(function () {
   var workoutTimer, infoTimer;
 
   function start(){
+    running = true;
     $('.start').hide();
     $('.stop').show();
     doRest(3);
@@ -76,6 +90,7 @@ $(document).ready(function () {
 
   function stop(e){
     e.preventDefault();
+    running = false;
     clearTimeout(workoutTimer);
     $('.stop').hide();
     $('.start').show();
