@@ -1,105 +1,103 @@
-var workout = 3,
-    rest = 1;
+$(document).ready(function () {
+  var workout = 3,
+  rest = 1;
 
-var playingSounds = true;
+  var playingSounds = true;
 
-$(function(){
-  $('.start').show();
-  $('.stop').hide();
-  $('.start').on('click', start);
-  $('.stop').on('click', stop);
+  $(function(){
+    $('.start').show();
+    $('.stop').hide();
+    $('.start').on('click', start);
+    $('.stop').on('click', stop);
 
-  $('.mute').on('click', mute);
-  $('.unMute').on('click', unMute);
+    $('.mute').on('click', mute);
+    $('.unMute').on('click', unMute);
 
-  showSoundStatus(false);
-});
+    showSoundStatus(false);
+  });
 
-var nextExercise = -1;
-var workoutTimer, infoTimer;
+  var nextExercise = -1;
+  var workoutTimer, infoTimer;
 
-function start(e){
-  e.preventDefault();
-  $('.start').hide();
-  $('.stop').show();
-  doRest(3);
-}
-
-function mute(e){
-  e.preventDefault();
-  playingSounds = false;
-  showSoundStatus(true);
-}
-function unMute(e){
-  e.preventDefault();
-  playingSounds = true;
-  showSoundStatus(true);
-}
-
-function showSoundStatus(showInfo){
-  if (showInfo) {
-    $('.actions .info').show();
-    clearTimeout(infoTimer);
-    infoTimer = setTimeout(function(){$('.actions .info').fadeOut();}, 2000);
+  function start(e){
+    e.preventDefault();
+    $('.start').hide();
+    $('.stop').show();
+    doRest(3);
   }
 
-  if (playingSounds) {
-    $('.unMute').hide();
-    $('.mute').show();
-  }else{
-    $('.mute').hide();
-    $('.unMute').show();
+  function mute(e){
+    e.preventDefault();
+    playingSounds = false;
+    showSoundStatus(true);
   }
-}
+  function unMute(e){
+    e.preventDefault();
+    playingSounds = true;
+    showSoundStatus(true);
+  }
 
-function doRest(period){
-  period = period || rest;
-  $('.getReady').show();
-  playSound('rest');
-  $('.drills li').removeClass('active');
-  nextExercise = (nextExercise + 1) % $('.drills li').length;
-  $($('.drills li')[nextExercise]).addClass('next');
-  workoutTimer = setTimeout(go, (period*1000));
-}
+  function showSoundStatus(showInfo){
+    if (showInfo) {
+      $('.actions .info').show();
+      clearTimeout(infoTimer);
+      infoTimer = setTimeout(function(){$('.actions .info').fadeOut();}, 2000);
+    }
 
-function go(){
-  $('.getReady').hide();
-  playSound('go');
-  $('.drills li').removeClass('next');
-  $($('.drills li')[nextExercise]).addClass('active');
-  workoutTimer = setTimeout(doRest, (workout*1000));
-}
-
-function stop(e){
-  e.preventDefault();
-  clearTimeout(workoutTimer);
-  $('.stop').hide();
-  $('.start').show();
-  nextExercise = -1;
-  $('.drills li').removeClass('next');
-  $('.drills li').removeClass('active');
-}
-
-function soundLoaded(type){
-  window.console.log('Loaded ', type);
-}
-
-var bell = new Audio('bell.mp3');
-bell.addEventListener("canplaythrough", soundLoaded('bell'), !1);
-
-var horn = new Audio('horn.mp3');
-horn.addEventListener("canplaythrough", soundLoaded('horn'), !1);
-
-// $.get();
-
-function playSound(type){
-  if (playingSounds) {
-    if (type === 'rest') {
-      bell.load();
-      bell.play();
+    if (playingSounds) {
+      $('.unMute').hide();
+      $('.mute').show();
     }else{
-      horn.load();
-      horn.play();
+      $('.mute').hide();
+      $('.unMute').show();
     }
   }
-}
+
+  function doRest(period){
+    period = period || rest;
+    $('.getReady').show();
+    playSound('rest');
+    $('.drills li').removeClass('active');
+    nextExercise = (nextExercise + 1) % $('.drills li').length;
+    $($('.drills li')[nextExercise]).addClass('next');
+    workoutTimer = setTimeout(go, (period*1000));
+  }
+
+  function go(){
+    $('.getReady').hide();
+    playSound('go');
+    $('.drills li').removeClass('next');
+    $($('.drills li')[nextExercise]).addClass('active');
+    workoutTimer = setTimeout(doRest, (workout*1000));
+  }
+
+  function stop(e){
+    e.preventDefault();
+    clearTimeout(workoutTimer);
+    $('.stop').hide();
+    $('.start').show();
+    nextExercise = -1;
+    $('.drills li').removeClass('next');
+    $('.drills li').removeClass('active');
+  }
+
+  function soundLoaded(type){
+    window.console.log('Loaded ', type);
+  }
+
+  var bell = new Audio('bell.mp3');
+  bell.addEventListener("canplaythrough", soundLoaded('bell'), !1);
+
+  var horn = new Audio('horn.mp3');
+  horn.addEventListener("canplaythrough", soundLoaded('horn'), !1);
+
+  function playSound(type){
+    if (playingSounds) {
+      if (type === 'rest') {
+        bell.play();
+      }else{
+        horn.play();
+      }
+    }
+  }
+});
