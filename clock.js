@@ -90,7 +90,7 @@ var bell = new Audio('bell.mp3');
 bell.addEventListener("canplaythrough", soundLoaded('bell'), !1);
 bell.load();
 
-var horn = new Audio('horn.mp3');
+var horn = new Audio('bell.mp3');
 horn.addEventListener("canplaythrough", soundLoaded('horn'), !1);
 horn.load();
 
