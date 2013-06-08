@@ -7,7 +7,10 @@ $(document).ready(function () {
   $(function(){
     $('.start').show();
     $('.stop').hide();
-    $('.start').on('click', start);
+    $('.start').on('click', function(e){
+      e.preventDefault();
+      loadAndStart();
+    });
     $('.stop').on('click', stop);
 
     $('.mute').on('click', mute);
@@ -19,8 +22,7 @@ $(document).ready(function () {
   var nextExercise = -1;
   var workoutTimer, infoTimer;
 
-  function start(e){
-    e.preventDefault();
+  function start(){
     $('.start').hide();
     $('.stop').show();
     doRest(3);
@@ -31,6 +33,7 @@ $(document).ready(function () {
     playingSounds = false;
     showSoundStatus(true);
   }
+
   function unMute(e){
     e.preventDefault();
     playingSounds = true;
@@ -81,23 +84,36 @@ $(document).ready(function () {
     $('.drills li').removeClass('active');
   }
 
+  var loadedFiles = 0;
   function soundLoaded(type){
-    window.console.log('Loaded ', type);
+    window.console.log('Loaded', type);
+    loadedFiles = loadedFiles + 1;
+    if (loadedFiles === 2) {
+      start();
+    }
   }
 
-  var bell = new Audio('bell.mp3');
-  bell.addEventListener("canplaythrough", soundLoaded('bell'), !1);
+  function loadAndStart(){
+    loadedFiles = 0;
+    bell = new Audio('bell.mp3');
+    bell.addEventListener("canplaythrough", soundLoaded('bell'), !1);
+    bell.load();
 
-  var horn = new Audio('horn.mp3');
-  horn.addEventListener("canplaythrough", soundLoaded('horn'), !1);
+    horn = new Audio('horn.mp3');
+    horn.addEventListener("canplaythrough", soundLoaded('horn'), !1);
+    horn.load();
+  }
+
+  var bell;
+  var horn;
 
   function playSound(type){
     if (playingSounds) {
       if (type === 'rest') {
-        bell.currentTime = 0;
+        // bell.currentTime = 0;
         bell.play();
       }else{
-        horn.currentTime = 0;
+        // horn.currentTime = 0;
         horn.play();
       }
     }
