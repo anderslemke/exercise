@@ -93,12 +93,12 @@ horn.addEventListener("canplaythrough", soundLoaded('horn'), !1);
 // $.get();
 
 function playSound(type){
-  bell.load();
-  horn.load();
   if (playingSounds) {
     if (type === 'rest') {
+      bell.load();
       bell.play();
     }else{
+      horn.load();
       horn.play();
     }
   }
