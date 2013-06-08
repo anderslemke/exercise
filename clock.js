@@ -81,16 +81,14 @@ function stop(e){
 }
 
 function soundLoaded(type){
-  alert('Sound loaded '+type);
-  window.console.log('Sound loaded');
-
+  
 }
 
 var bell = new Audio('bell.mp3');
 bell.addEventListener("canplaythrough", soundLoaded('bell'), !1);
 bell.load();
 
-var horn = new Audio('bell.mp3');
+var horn = new Audio('horn.mp3');
 horn.addEventListener("canplaythrough", soundLoaded('horn'), !1);
 horn.load();
 
@@ -99,8 +97,10 @@ horn.load();
 function playSound(type){
   if (playingSounds) {
     if (type === 'rest') {
+      alert('bell');
       bell.play();
     }else{
+      alert('horn');
       horn.play();
     }
   }
