@@ -10,15 +10,7 @@ a:hover {
   text-decoration: none;
 }
 
-.actions {
-  padding-left: 3%;
-}
-
 .actions div {
-  width:42%;
-  padding:5% 2%; 
-  text-align:left;
-  position:fixed;
   cursor:pointer;
 }
 
@@ -34,20 +26,6 @@ a:hover {
   display:none;
 }
 
-.actions div.start, .actions div.stop {
-  top:0;
-  left:0;
-  padding-left:5%;
-}
-
-.actions div.mute, .actions div.unMute {
-  vertical-align: top;
-  padding-right:5%;
-  text-align:right;
-  top:0;
-  right:0;
-}
-
 .drills {
   margin-top:2em;
 }
@@ -55,33 +33,84 @@ a:hover {
 ol{
   padding:0px 2% 0 5%;
   margin:0px;
-  font-size:23px;
 }
 
 li {
-  line-height: 1.2em;
   list-style:none;
   margin-left:0;
   text-align: left;
   font-weight:200;
-  /*transition-timing-function: linear;*/
   transition: font-size 200, font-weight 200, height 200, margin 200, line-height 200, letter-spacing 200;
-  /*transition: font-weight 100;*/
-  /*transition: color 100;*/
 }
 
 li.active {
   color: #af111c;
-  
 }
 
 li.active, li.next {
   /*letter-spacing: -7px;*/
   /*font-size: 100px;*/
-  line-height:1em;
   font-weight:bold;
   margin:0.2em 0 0.3em 0;
+}
+
+body {
+  font-size:16px;
+}
+
+li {
+  font-size:2em;
+  line-height: 1.3em;
+}
+li.active, li.next {
+  font-size:6em;
+  line-height:1em;
+}
+
+.actions{
+  font-size:3em;
   
+}
+
+.actions div {
+  padding:1em;
+}
+.actions div.start, .actions div.stop {
+}
+
+.actions div.mute, .actions div.unMute {
+  
+}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (max-width: 979px) {
+  body{
+    font-size: 12px;
+  }
+  .drills {
+    padding-left:1em;
+  }
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+  body{
+    font-size: 12px;
+  }
+  .actions {
+    height:2.5em;
+    clear:both;
+  }
+  .actions div {
+    float:left;
+  }
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  body{
+    font-size: 10px;
+  }
 }
 
 li.active span.part, li.next span.part {

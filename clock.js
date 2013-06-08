@@ -1,8 +1,8 @@
 $(document).ready(function () {
-  var workout = 3,
-  rest = 1;
+  var workout = 30,
+  rest = 10;
 
-  var playingSounds = true;
+  var playingSounds = false;
 
   $(function(){
     $('.start').show();
@@ -93,6 +93,9 @@ $(document).ready(function () {
     }
   }
 
+  var bell;
+  var horn;
+
   function loadAndStart(){
     loadedFiles = 0;
     bell = new Audio('bell.mp3');
@@ -104,16 +107,11 @@ $(document).ready(function () {
     horn.load();
   }
 
-  var bell;
-  var horn;
-
   function playSound(type){
     if (playingSounds) {
       if (type === 'rest') {
-        // bell.currentTime = 0;
         bell.play();
       }else{
-        // horn.currentTime = 0;
         horn.play();
       }
     }
