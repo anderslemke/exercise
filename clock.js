@@ -2,7 +2,7 @@ $(document).ready(function () {
   var workout = 30,
   rest = 10;
 
-  var playingSounds = false;
+  var playingSounds = true;
 
   $(function(){
     $('.start').show();
