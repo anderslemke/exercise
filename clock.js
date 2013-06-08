@@ -1,5 +1,5 @@
-var workout = 30,
-    rest = 10;
+var workout = 3,
+    rest = 1;
 
 var playingSounds = true;
 
@@ -12,9 +12,7 @@ $(function(){
   $('.mute').on('click', mute);
   $('.unMute').on('click', unMute);
 
-  
   showSoundStatus(false);
-  fitText();
 });
 
 var nextExercise = -1;
@@ -61,7 +59,6 @@ function doRest(period){
   $('.drills li').removeClass('active');
   nextExercise = (nextExercise + 1) % $('.drills li').length;
   $($('.drills li')[nextExercise]).addClass('next');
-  fitText();
   workoutTimer = setTimeout(go, (period*1000));
 }
 
@@ -70,19 +67,7 @@ function go(){
   playSound('go');
   $('.drills li').removeClass('next');
   $($('.drills li')[nextExercise]).addClass('active');
-  fitText();
   workoutTimer = setTimeout(doRest, (workout*1000));
-}
-
-function fitText(){
-  $(window).off('resize.fittext orientationchange.fittext');
-  $('body').fitText();
-  $('.actions div').fitText(0.5,  {minFontSize: '40'});
-  $('.drills li').css({fontSize: 'inherit'});
-  $('.drills li').fitText(3, {minFontSize: '23'});
-  var compress = 1;
-  $('.active').fitText(compress);
-  $('.next').fitText(compress);
 }
 
 function stop(e){
@@ -93,16 +78,21 @@ function stop(e){
   nextExercise = -1;
   $('.drills li').removeClass('next');
   $('.drills li').removeClass('active');
-  fitText();
 }
 
-var bell = document.createElement('audio');
-bell.setAttribute('src', 'bell.mp3');
+function soundLoaded(){
+  window.console.log('Sound loaded');
+}
 
-var horn = document.createElement('audio');
-horn.setAttribute('src', 'horn.mp3');
+var bell = new Audio('bell.mp3');
+bell.addEventListener("canplaythrough", soundLoaded(), !1);
+bell.load();
 
-$.get();
+var horn = new Audio('horn.mp3');
+horn.addEventListener("canplaythrough", soundLoaded(), !1);
+horn.load();
+
+// $.get();
 
 function playSound(type){
   if (playingSounds) {
