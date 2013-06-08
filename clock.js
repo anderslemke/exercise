@@ -97,10 +97,8 @@ horn.load();
 function playSound(type){
   if (playingSounds) {
     if (type === 'rest') {
-      alert('bell');
-      bell.play();
+      horn.play();
     }else{
-      alert('horn');
       horn.play();
     }
   }
