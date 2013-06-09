@@ -28,6 +28,10 @@ $(document).ready(function () {
       }
     });
 
+    $('.credits').on('click', function(e){
+      $('.credits p').toggle();
+    });
+
     showSoundStatus(false);
   });
 
