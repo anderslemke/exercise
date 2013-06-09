@@ -41,7 +41,7 @@ li {
   margin-left:0;
   text-align: left;
   font-weight:200;
-  transition: font-size 200, font-weight 200, height 200, margin 200, line-height 200, letter-spacing 200;
+  /*transition: font-size 200, font-weight 200, height 200, margin 200, line-height 200, letter-spacing 200;*/
 }
 
 li.active {

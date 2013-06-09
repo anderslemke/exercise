@@ -25,7 +25,6 @@ $(document).ready(function () {
           evt.preventDefault();
           loadAndStart();
         }
-        
       }
     });
 
@@ -71,20 +70,34 @@ $(document).ready(function () {
   }
 
   function doRest(period){
-    period = period || rest;
-    $('.getReady').show();
     playSound('rest');
-    $('.drills li').removeClass('active');
-    nextExercise = (nextExercise + 1) % $('.drills li').length;
+    period = period || rest;
+    var element = $('.drills li.active');
+    var index = $('.drills li').index(element);
+    nextExercise = (index + 1) % $('.drills li').length;
+
+    element.removeClass('active');
     $($('.drills li')[nextExercise]).addClass('next');
+
+    if (nextExercise > 2) {
+      turnAround();
+    }
+
     workoutTimer = setTimeout(go, (period*1000));
   }
 
+  function turnAround(){
+    var top = $($('.drills li')[0]);
+    var list = $('.drills ol');
+    top.remove();
+    list.append(top);
+  }
+
   function go(){
-    $('.getReady').hide();
     playSound('go');
+    var element = $('.drills li.next');
     $('.drills li').removeClass('next');
-    $($('.drills li')[nextExercise]).addClass('active');
+    element.addClass('active');
     workoutTimer = setTimeout(doRest, (workout*1000));
   }
 
@@ -94,9 +107,20 @@ $(document).ready(function () {
     clearTimeout(workoutTimer);
     $('.stop').hide();
     $('.start').show();
-    nextExercise = -1;
     $('.drills li').removeClass('next');
     $('.drills li').removeClass('active');
+
+    reset();
+  }
+
+  var firstElement = $('.drills li.first');
+
+  function reset(){
+    var all = $('.drills li');
+    if (all.index(firstElement) !== 0) {
+      turnAround();
+      reset();
+    }
   }
 
   var loadedFiles = 0;
