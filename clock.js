@@ -28,7 +28,7 @@ $(document).ready(function () {
       }
     });
 
-    $('.credits').on('click', function(e){
+    $('.credits h3').on('click', function(e){
       $('.credits p').toggle();
     });
 
