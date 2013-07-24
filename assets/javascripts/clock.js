@@ -128,6 +128,19 @@ $(document).ready(function () {
     $('.drills li').removeClass('active');
 
     reset();
+
+    promptForFacebookThing();
+  }
+
+  function promptForFacebookThing(){
+    FB.ui({
+      method: 'feed',
+      link: 'http://thescientificsevenminuteworkout.com',
+      picture: 'http://thescientificsevenminuteworkout.com/image.png',
+      name: 'The Scientific Seven-Minute Workout',
+      caption: 'I just did it!',
+      description: rounds+'times, that is!'
+    }, function(response){});
   }
 
   var firstElement = $('.drills li.first');
