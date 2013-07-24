@@ -133,13 +133,14 @@ $(document).ready(function () {
   }
 
   function promptForFacebookThing(){
+    var times = rounds === 1 ? 'time' : 'times';
     FB.ui({
       method: 'feed',
       link: 'http://thescientificsevenminuteworkout.com',
       picture: 'http://thescientificsevenminuteworkout.com/image.png',
-      name: 'The Scientific Seven-Minute Workout',
-      caption: 'I just did it!',
-      description: rounds+'times, that is!'
+      name: 'I just did this '+rounds+' '+times,
+      caption: 'The Scientific Seven-Minute Workout',
+      description: ''
     }, function(response){});
   }
 
