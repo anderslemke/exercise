@@ -129,7 +129,7 @@ $(document).ready(function () {
 
     reset();
 
-    promptForFacebookThing();
+    // promptForFacebookThing();
   }
 
   function promptForFacebookThing(){
