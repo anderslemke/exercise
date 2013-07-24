@@ -4,6 +4,7 @@ $(document).ready(function () {
 
   var playingSounds = true;
   var running = false;
+  var rounds = 0;
 
   $(function(){
     $('.start').show();
@@ -33,6 +34,7 @@ $(document).ready(function () {
     });
 
     showSoundStatus(false);
+    showRoundStatus();
   });
 
   var nextExercise = -1;
@@ -57,6 +59,10 @@ $(document).ready(function () {
     showSoundStatus(true);
   }
 
+  function showRoundStatus(){
+    $('div.counter').html(''+rounds);
+  }
+
   function showSoundStatus(showInfo){
     if (showInfo) {
       $('.actions .info').show();
@@ -79,6 +85,11 @@ $(document).ready(function () {
     var element = $('.drills li.active');
     var index = $('.drills li').index(element);
     nextExercise = (index + 1) % $('.drills li').length;
+
+    if (element.hasClass('last')) {
+      rounds++;
+      showRoundStatus();
+    }
 
     element.removeClass('active');
     $($('.drills li')[nextExercise]).addClass('next');
@@ -141,11 +152,11 @@ $(document).ready(function () {
 
   function loadAndStart(){
     loadedFiles = 0;
-    bell = new Audio('bell.mp3');
+    bell = new Audio('/assets/sounds/bell.mp3');
     bell.addEventListener("canplaythrough", soundLoaded('bell'), !1);
     bell.load();
 
-    horn = new Audio('horn.mp3');
+    horn = new Audio('/assets/sounds/horn.mp3');
     horn.addEventListener("canplaythrough", soundLoaded('horn'), !1);
     horn.load();
   }

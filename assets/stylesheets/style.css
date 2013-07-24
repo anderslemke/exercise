@@ -29,6 +29,8 @@ a:hover {
 
 .drills {
   margin-top:2em;
+  position:relative;
+  z-index:2;
 }
 
 ol{
@@ -119,7 +121,6 @@ li.active span.part, li.next span.part {
 }
 
 li span.part {
-
   letter-spacing:0;
   background-color: #DDD;
   display:inline-block;
@@ -129,7 +130,22 @@ li span.part {
   /*color:#999;*/
 }
 
+.counter {
+  position:absolute;
+  right:-20px;
+  top:-80px;
+  margin:0;
+  padding:0;
+  z-index:1;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  color:#F4F4F4;
+  font-size:400px;
+  line-height:400px;
+}
+
 .credits {
+  z-index:3;
   position:fixed;
   font-size:14px;
   right:0;
