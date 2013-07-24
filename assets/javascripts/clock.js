@@ -42,6 +42,8 @@ $(document).ready(function () {
 
   function start(){
     running = true;
+    rounds = 0;
+    showRoundStatus();
     $('.start').hide();
     $('.stop').show();
     doRest(3);
