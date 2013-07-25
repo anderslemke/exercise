@@ -133,14 +133,29 @@ $(document).ready(function () {
   }
 
   function promptForFacebookThing(){
-    var times = rounds === 1 ? 'time' : 'times';
+    var times;
+    switch(rounds){
+      case 0:
+        times = 'Not';
+        break;
+      case 1:
+        times = 'Once';
+        break;
+      case 2:
+        times = 'Twice';
+        break;
+      default:
+        times = rounds + ' times';
+        break;
+    }
+    
     FB.ui({
       method: 'feed',
       link: 'http://thescientificsevenminuteworkout.com',
-      picture: 'http://thescientificsevenminuteworkout.com/image.png',
-      name: 'I just did this '+rounds+' '+times,
-      caption: 'The Scientific Seven-Minute Workout',
-      description: ''
+      picture: 'http://thescientificsevenminuteworkout.com/images/count/'+rounds+'.png',
+      name: 'The Scientific Seven-Minute Workout',
+      caption: 'It\'s very hard',
+      description: 'And I just did it! ' + times + '!'
     }, function(response){});
   }
 
