@@ -129,7 +129,7 @@ $(document).ready(function () {
 
     reset();
 
-    // promptForFacebookThing();
+    promptForFacebookThing();
   }
 
   function promptForFacebookThing(){
@@ -152,7 +152,7 @@ $(document).ready(function () {
     FB.ui({
       method: 'feed',
       link: 'http://thescientificsevenminuteworkout.com',
-      picture: 'http://thescientificsevenminuteworkout.com/images/count/'+rounds+'.png',
+      picture: 'http://thescientificsevenminuteworkout.com/assets/images/counts/'+rounds+'.png',
       name: 'The Scientific Seven-Minute Workout',
       caption: 'It\'s very hard and you\'ll really get to sweat.',
       description: 'And I just did it. ' + times + '!'
