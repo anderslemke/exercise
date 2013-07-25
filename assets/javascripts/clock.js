@@ -154,8 +154,8 @@ $(document).ready(function () {
       link: 'http://thescientificsevenminuteworkout.com',
       picture: 'http://thescientificsevenminuteworkout.com/images/count/'+rounds+'.png',
       name: 'The Scientific Seven-Minute Workout',
-      caption: 'It\'s very hard',
-      description: 'And I just did it! ' + times + '!'
+      caption: 'It\'s very hard and you\'ll really get to sweat.',
+      description: 'And I just did it. ' + times + '!'
     }, function(response){});
   }
 
