@@ -13,6 +13,14 @@ $(document).ready(function () {
       e.preventDefault();
       loadAndStart();
     });
+    $('.share.facebook').on('click', function(e) {
+      e.preventDefault();
+      promptForFacebookThing();
+    });
+    $('.share.twitter').on('click', function(e) {
+      e.preventDefault();
+      window.open('http://twitter.com/share?text='+twitterText(), 'Share your workout', 'height=250,width=550');
+    });
     $('.stop').on('click', stop);
 
     $('.mute').on('click', mute);
@@ -44,6 +52,7 @@ $(document).ready(function () {
     running = true;
     rounds = 0;
     showRoundStatus();
+    $('.share').hide();
     $('.start').hide();
     $('.stop').show();
     doRest(3);
@@ -124,15 +133,18 @@ $(document).ready(function () {
     clearTimeout(workoutTimer);
     $('.stop').hide();
     $('.start').show();
+    $('.share').show();
     $('.drills li').removeClass('next');
     $('.drills li').removeClass('active');
 
     reset();
-
-    promptForFacebookThing();
   }
 
-  function promptForFacebookThing(){
+  function twitterText(){
+    return primerText() + ' ' + iDidItText();
+  }
+
+  function iDidItText(){
     var times;
     switch(rounds){
       case 0:
@@ -148,14 +160,22 @@ $(document).ready(function () {
         times = rounds + ' times';
         break;
     }
+    return 'And I just did it. ' + times + '!';
+  }
+  function primerText(){
+    return 'It\'s very tough and you really get to sweat.';
+  }
+
+  function promptForFacebookThing(){
+    
     
     FB.ui({
       method: 'feed',
       link: 'http://thescientificsevenminuteworkout.com',
       picture: 'http://thescientificsevenminuteworkout.com/assets/images/counts/'+rounds+'.png',
       name: 'The Scientific Seven-Minute Workout',
-      caption: 'It\'s very hard and you\'ll really get to sweat.',
-      description: 'And I just did it. ' + times + '!'
+      caption: primerText(),
+      description: iDidItText()
     }, function(response){});
   }
 

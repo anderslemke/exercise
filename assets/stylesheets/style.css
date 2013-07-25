@@ -12,12 +12,26 @@ a:hover {
 }
 
 .actions {
+  padding-top:0.4em;
+  padding-left:0.4em;
   position:relative;
   z-index:100;
+  font-size:3em;
 }
 
 .actions div {
   cursor:pointer;
+  padding:0.6em;
+}
+.actions div i:hover {
+  color:#777;
+}
+
+.facebook i {
+  color:rgb(109,132,180);
+}
+.twitter i {
+  color:rgb(29,173,235);
 }
 
 .actions .info {
@@ -29,7 +43,7 @@ a:hover {
   position:absolute;
 }
 
-.start, .stop, .mute, .unMute {
+.start, .stop, .mute, .unMute, .share {
   display:none;
 }
 
@@ -76,20 +90,6 @@ li.active, li.next {
   line-height:1em;
 }
 
-.actions{
-  font-size:3em;
-  
-}
-
-.actions div {
-  padding:1em;
-}
-.actions div.start, .actions div.stop {
-}
-
-.actions div.mute, .actions div.unMute {
-  
-}
  
 /* Portrait tablet to landscape and desktop */
 @media (max-width: 979px) {
