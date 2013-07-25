@@ -22,15 +22,16 @@ a:hover {
 .actions div {
   cursor:pointer;
   padding:0.6em;
+  width:1em;
 }
-.actions div i:hover {
+.actions div:hover i {
   color:#777;
 }
 
-.facebook i {
+.actions div.facebook:hover i{
   color:rgb(109,132,180);
 }
-.twitter i {
+.actions div.twitter:hover i {
   color:rgb(29,173,235);
 }
 
