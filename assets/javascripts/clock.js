@@ -166,18 +166,51 @@ $(document).ready(function () {
     return 'It\'s very tough and you really get to sweat.';
   }
 
+  function roundsText(){
+    switch(rounds){
+      case 1:
+        return '1 round';
+      default:
+        return rounds+' rounds';
+    }
+  }
+
   function promptForFacebookThing(){
-    FB.api(
-      'me/scientificseven:complete',
-      'post',
-      {
-        workout: "http://thescientificsevenminuteworkout.com/1.html",
-        privacy: {'value': 'SELF'}
-      },
-      function(response) {
-        window.console.log(response);
+    if (facebookConnected) {
+      postToFacebook();
+    }else{
+      connectToFacebookAndPost();
+    }
+  }
+
+  function connectToFacebookAndPost(){
+    FB.login(function(response){
+      if (response.status === 'connected') {
+        postToFacebook();
+      }else{
+        alert('You must connect your Facebook account before you can post your activity.');
       }
-    );
+    }, {scope: 'publish_actions'});
+  }
+
+  function postToFacebook(){
+    if (confirm('Post activity to Facebook?\nYou did '+roundsText()+'.')) {
+      FB.api(
+        'me/scientificseven:complete',
+        'post',
+        {
+          workout: 'http://thescientificsevenminuteworkout.com/workouts/'+rounds+'.html'
+        },
+        function(response) {
+          if (response.error) {
+            window.console.log(response);
+            connectToFacebookAndPost();
+          }else{
+            alert('Posted! Nice job!');
+          }
+        }
+      );
+    }
   }
 
   var firstElement = $('.drills li.first');
@@ -192,7 +225,6 @@ $(document).ready(function () {
 
   var loadedFiles = 0;
   function soundLoaded(type){
-    window.console.log('Loaded', type);
     loadedFiles = loadedFiles + 1;
     if (loadedFiles === 2) {
       start();
