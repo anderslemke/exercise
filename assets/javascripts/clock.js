@@ -145,38 +145,39 @@ $(document).ready(function () {
   }
 
   function iDidItText(){
-    var times;
+    var text;
     switch(rounds){
       case 0:
-        times = 'Not';
+        text = 'I didn\'t do it. Yet.';
         break;
       case 1:
-        times = 'Once';
+        text = 'I just did it.';
         break;
       case 2:
-        times = 'Twice';
+        text = 'I just did it. Twice!';
         break;
       default:
-        times = rounds + ' times';
+        text = 'I just did it. '+ rounds + ' times!';
         break;
     }
-    return 'And I just did it. ' + times + '!';
+    return text;
   }
   function primerText(){
     return 'It\'s very tough and you really get to sweat.';
   }
 
   function promptForFacebookThing(){
-    
-    
-    FB.ui({
-      method: 'feed',
-      link: 'http://thescientificsevenminuteworkout.com',
-      picture: 'http://thescientificsevenminuteworkout.com/assets/images/counts/'+rounds+'.png',
-      name: 'The Scientific Seven-Minute Workout',
-      caption: primerText(),
-      description: iDidItText()
-    }, function(response){});
+    FB.api(
+      'me/scientificseven:complete',
+      'post',
+      {
+        workout: "http://thescientificsevenminuteworkout.com/1.html",
+        privacy: {'value': 'SELF'}
+      },
+      function(response) {
+        // handle the response
+      }
+    );
   }
 
   var firstElement = $('.drills li.first');

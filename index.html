@@ -34,6 +34,7 @@
         appId      : '510889418980467',                        // App ID from the app dashboard
         channelUrl : '//thescientificsevenminuteworkout.com/channel.html', // Channel file for x-domain comms
         status     : true,                                 // Check Facebook Login status
+        cookie     : true,           // enable cookies to allow the server to access the session
         xfbml      : true                                  // Look for social plugins on the page
       });
 
@@ -49,7 +50,13 @@
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));
   </script>
-
+  <div
+    class="fb-login-button"
+    data-show-faces="true"
+    data-width="200"
+    data-max-rows="1"
+    data-scope="publish_actions">
+  </div>
   <div class="container-fluid">
     <div class="row-fluid">
 
