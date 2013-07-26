@@ -167,14 +167,18 @@ $(document).ready(function () {
   }
 
   function promptForFacebookThing(){
+    alert('Getting Facebook on the line..');
+    FB.api('/platform', function(response) {
+        alert(response.company_overview);
+      });
     FB.api(
       'me/scientificseven:complete',
       'post',
       {
-        workout: "http://thescientificsevenminuteworkout.com/1.html",
-        privacy: {'value': 'SELF'}
+        workout: "http://thescientificsevenminuteworkout.com/1.html"
       },
       function(response) {
+        window.console.log(response);
         // handle the response
       }
     );
