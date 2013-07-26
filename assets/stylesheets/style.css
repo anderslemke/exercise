@@ -1,9 +1,10 @@
 body {
   padding:0;
   overflow:hidden;
+  font-size:16px;
 }
 
-* {
+.drills *, .actions *, .credits * {
   color: #AAA;
 }
 
@@ -54,44 +55,35 @@ a:hover {
   z-index:2;
 }
 
-ol{
+.drills ol{
   padding:0px 2% 0 5%;
   margin:0px;
 }
 
-li {
+.drills li {
   list-style:none;
   margin-left:0;
   text-align: left;
   font-weight:200;
+  font-size:2em;
+  line-height: 1.3em;
   /*transition: font-size 200, font-weight 200, height 200, margin 200, line-height 200, letter-spacing 200;*/
 }
 
-li.active {
+.drills .active {
   color: #af111c;
 }
 
-li.active, li.next {
+.drills .active, .drills .next {
   /*letter-spacing: -7px;*/
   /*font-size: 100px;*/
   font-weight:bold;
   margin:0.2em 0 0.3em 0;
-}
-
-body {
-  font-size:16px;
-}
-
-li {
-  font-size:2em;
-  line-height: 1.3em;
-}
-li.active, li.next {
   font-size:6em;
   line-height:1em;
 }
 
- 
+
 /* Portrait tablet to landscape and desktop */
 @media (max-width: 979px) {
   body{

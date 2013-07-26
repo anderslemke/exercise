@@ -7,6 +7,7 @@ $(document).ready(function () {
   var rounds = 0;
 
   $(function(){
+    bindModals();
     $('.start').show();
     $('.stop').hide();
     $('.start').on('click', function(e){
@@ -175,42 +176,54 @@ $(document).ready(function () {
     }
   }
 
+  function showModal(id) {
+    $('.js-rounds').html(roundsText());
+    $(id).modal();
+  }
+
   function promptForFacebookThing(){
     if (facebookConnected) {
-      postToFacebook();
+      showModal('#facebookPostModal');
     }else{
-      connectToFacebookAndPost();
+      showModal('#facebookConnectModal');
     }
+  }
+
+  function bindModals(){
+    $('.js-connect-to-facebook').on('click', connectToFacebookAndPost);
+    $('.js-post-activity').on('click', postToFacebook);
   }
 
   function connectToFacebookAndPost(){
     FB.login(function(response){
       if (response.status === 'connected') {
-        postToFacebook();
+        showModal('#facebookPostModal');
       }else{
-        alert('You must connect your Facebook account before you can post your activity.');
+        showModal('#facebookConnectModal');
       }
     }, {scope: 'publish_actions'});
   }
 
   function postToFacebook(){
-    if (confirm('Post activity to Facebook?\nYou did '+roundsText()+'.')) {
-      FB.api(
-        'me/scientificseven:complete',
-        'post',
-        {
-          workout: 'http://thescientificsevenminuteworkout.com/workouts/'+rounds+'.html'
-        },
-        function(response) {
-          if (response.error) {
-            window.console.log(response);
-            connectToFacebookAndPost();
-          }else{
-            alert('Posted! Nice job!');
-          }
+    FB.api(
+      'me/scientificseven:complete',
+      'post',
+      {
+        workout: 'http://thescientificsevenminuteworkout.com/workouts/'+rounds+'.html'
+      },
+      function(response) {
+        if (response.error) {
+          window.console.log(response);
+          showModal('#facebookConnectModal');
+        }else{
+          window.console.log(response);
+          var activityId = response.id;
+          var activityUrl = 'https://www.facebook.com/me/activity/'+activityId
+          $('.js-facebook-activity-link').attr('href', activityUrl);
+          showModal('#facebookSuccessModal');
         }
-      );
-    }
+      }
+    );
   }
 
   var firstElement = $('.drills li.first');
