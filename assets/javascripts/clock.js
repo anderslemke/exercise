@@ -7,40 +7,9 @@ $(document).ready(function () {
   var rounds = 0;
 
   $(function(){
-    bindModals();
+    bind();
     $('.start').show();
     $('.stop').hide();
-    $('.start').on('click', function(e){
-      e.preventDefault();
-      loadAndStart();
-    });
-    $('.share.facebook').on('click', function(e) {
-      e.preventDefault();
-      promptForFacebookThing();
-    });
-    $('.share.twitter').on('click', function(e) {
-      e.preventDefault();
-      window.open('http://twitter.com/share?text='+twitterText(), 'Share your workout', 'height=250,width=550');
-    });
-    $('.stop').on('click', stop);
-
-    $('.mute').on('click', mute);
-    $('.unMute').on('click', unMute);
-
-    $(document).keyup(function(evt) {
-      if (evt.keyCode == 32) {
-        if (running) {
-          stop(evt);
-        }else{
-          evt.preventDefault();
-          loadAndStart();
-        }
-      }
-    });
-
-    $('.credits h3').on('click', function(e){
-      $('.credits p').toggle();
-    });
 
     showSoundStatus(false);
     showRoundStatus();
@@ -189,7 +158,39 @@ $(document).ready(function () {
     }
   }
 
-  function bindModals(){
+  function bind(){
+    $('.start').on('click', function(e){
+      e.preventDefault();
+      loadAndStart();
+    });
+    $('.share.twitter').on('click', function(e) {
+      e.preventDefault();
+      window.open('http://twitter.com/share?text='+twitterText(), 'Share your workout', 'height=250,width=550');
+    });
+    $('.share.facebook').on('click', function(e) {
+      e.preventDefault();
+      promptForFacebookThing();
+    });
+    $('.stop').on('click', stop);
+
+    $('.mute').on('click', mute);
+    $('.unMute').on('click', unMute);
+
+    $(document).keyup(function(evt) {
+      if (evt.keyCode == 32) {
+        if (running) {
+          stop(evt);
+        }else{
+          evt.preventDefault();
+          loadAndStart();
+        }
+      }
+    });
+
+    $('.credits h3').on('click', function(e){
+      $('.credits p').toggle();
+    });
+
     $('.js-connect-to-facebook').on('click', connectToFacebookAndPost);
     $('.js-post-activity').on('click', postToFacebook);
   }

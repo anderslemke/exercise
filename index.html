@@ -4,8 +4,10 @@
   <title>The Scientific Seven-Minute Workout</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:700' rel='stylesheet' type='text/css'>
-  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-  <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+  <!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet"> -->
+  <link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/stylesheets/rebootstrap.css" rel="stylesheet">
   <link href="/assets/stylesheets/style.css" rel="stylesheet">
 
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
@@ -117,10 +119,11 @@
   <div class="modal hide" id="facebookConnectModal">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h3>Posting activity to Facebook</h3>
+      <h3>Post workout on Facebook?</h3>
     </div>
     <div class="modal-body">
-      <p>Want to share your workouts on Facebook? Then you'll have to</p>
+      <p>Of course!</p>
+      <p>We will have Facebook ask you to give us permission to</p>
       <ul>
         <li>connect your Facebook account, and</li>
         <li>allow us to post on your behalf.</li>
@@ -130,27 +133,22 @@
       </p>
     </div>
     <div class="modal-footer">
-      <a href="#" class="btn" data-dismiss="modal" >Close</a>
-      <a href="#" class="btn btn-primary js-connect-to-facebook" data-dismiss="modal">OK, let's go</a>
+      <a href="#" class="btn btn-success js-connect-to-facebook" data-dismiss="modal">OK, let's do it</a>
     </div>
   </div>
 
   <div class="modal hide" id="facebookPostModal">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h3>Post this?</h3>
+      <h3>Post this workout?</h3>
     </div>
     <div class="modal-body">
       <p>
-        Do your want to post this workout to Facebook?
-      </p>
-      <p>
-        Our records tells us you did <span class="js-rounds"></span>.
+        Our records tells us you just did <span class="js-rounds"></span>.
       </p>
     </div>
     <div class="modal-footer">
-      <a href="#" class="btn" data-dismiss="modal" >No thanks</a>
-      <a href="#" class="btn btn-primary js-post-activity" data-dismiss="modal">Yes, post it</a>
+      <a href="#" class="btn btn-success js-post-activity" data-dismiss="modal">Yes, post it</a>
     </div>
   </div>
 
@@ -164,16 +162,19 @@
         We posted your activity on Facebook.
       </p>
       <p>
-        <a class="js-facebook-activity-link" href="">Go to activity on Facebook</a>
+        <a class="js-facebook-activity-link" href="" target="_blank">Go to activity on Facebook.</a>
       </p>
     </div>
     <div class="modal-footer">
-      <a href="#" class="btn btn-primary" data-dismiss="modal">OK</a>
+      <a href="#" class="btn btn-success" data-dismiss="modal">OK</a>
     </div>
   </div>
 
   <script src="/assets/javascripts/jquery.js"></script>
+  <!-- 
   <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+ -->
+  <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="/assets/javascripts/clock.js"></script>
 </body>
 </html>

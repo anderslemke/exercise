@@ -1,0 +1,14 @@
+
+.modal {
+  border-radius:0;
+  -webkit-border-radius:0;
+  -moz-border-radius:0;
+}
+
+.modal-footer {
+  background-color: white;
+}
+
+.btn {
+  background-image:none;
+}
