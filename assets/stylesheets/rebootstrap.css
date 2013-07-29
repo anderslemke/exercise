@@ -5,8 +5,9 @@
   -moz-border-radius:0;
 }
 
-.modal-footer {
+.modal-footer, .modal-header {
   background-color: white;
+  border:0;
 }
 
 .btn {
