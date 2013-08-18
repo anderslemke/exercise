@@ -177,14 +177,19 @@ $(document).ready(function () {
     $('.unMute').on('click', unMute);
 
     $(document).keyup(function(evt) {
-      if (evt.keyCode == 32) {
+      evt.preventDefault();
+      var focused = $(':focus');
+      if (evt.keyCode == 32 && !focused.is("li")) {
         if (running) {
           stop(evt);
         }else{
-          evt.preventDefault();
           loadAndStart();
         }
       }
+    });
+
+    $('li').keyup(function(evt) {
+      evt.preventDefault();
     });
 
     $('.credits h3').on('click', function(e){

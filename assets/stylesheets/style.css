@@ -8,6 +8,15 @@ body {
   color: #AAA;
 }
 
+::selection {
+  background: #AAA; /* Safari */
+  color: white;
+  }
+::-moz-selection {
+  background: #AAA; /* Firefox */
+  color: white;
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -68,6 +77,18 @@ a:hover {
   font-size:2em;
   line-height: 1.3em;
   /*transition: font-size 200, font-weight 200, height 200, margin 200, line-height 200, letter-spacing 200;*/
+}
+
+.drills li:focus {
+  outline: none;
+}
+
+/*
+Make sure contenteditable will not fuck up text size
+ */
+.drills li span {
+  font-size: 1em !important;
+  line-height: inherit !important;
 }
 
 .drills .active {
