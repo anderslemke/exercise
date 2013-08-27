@@ -1,72 +1,66 @@
-var bell;
-var horn;
-
-soundManager.setup({
-  url: '/assets/soundmanager2/swf/',
-  onready: function() {
-    bell = soundManager.createSound({
-     url: '/assets/sounds/bell.mp3'
-    });
-    horn = soundManager.createSound({
-     url: '/assets/sounds/horn.mp3'
-    });
-  }
-});
-
 $(document).ready(function () {
-  var workout = 30,
-  rest = 10;
+  renderButtons();
+  bind();
 
-  var playingSounds = true;
-  var running = false;
-  var rounds = 0;
+  var workoutTimer;
 
-  $(function(){
-    bind();
-    $('.start').show();
-    $('.stop').hide();
-
-    showSoundStatus(false);
+  function renderButtons(blinkInfo) {
+    showSoundStatus(blinkInfo);
     showRoundStatus();
-  });
+    if (State.running) {
+      $('.share').hide();
+      $('.start').hide();
+      $('.stop').show();
+    }else{
+      $('.share').show();
+      $('.start').show();
+      $('.stop').hide();
+    }
+  }
 
-  var nextExercise = -1;
-  var workoutTimer, infoTimer;
+  function start(e){
+    e.preventDefault();
+  
+    State.rounds = 0;
+    State.running = true;
+    renderButtons();
+    doRest(5);
+  }
 
-  function start(){
-    running = true;
-    rounds = 0;
-    showRoundStatus();
-    $('.share').hide();
-    $('.start').hide();
-    $('.stop').show();
-    doRest(3);
+  function stop(e){
+    e.preventDefault();
+  
+    State.running = false;
+    renderButtons();
+    clearTimeout(workoutTimer);
+    resetList();
   }
 
   function mute(e){
     e.preventDefault();
-    playingSounds = false;
-    showSoundStatus(true);
+    State.playingSounds = false;
+    renderButtons(true);
   }
 
   function unMute(e){
     e.preventDefault();
-    playingSounds = true;
-    showSoundStatus(true);
+    State.playingSounds = true;
+    renderButtons(true);
   }
 
   function showRoundStatus(){
-    $('div.counter').html(''+rounds);
+    $('div.counter').html(''+State.rounds);
   }
 
+  var soundInfoTimer;
   function showSoundStatus(showInfo){
     if (showInfo) {
       $('.actions .info').show();
-      clearTimeout(infoTimer);
-      infoTimer = setTimeout(function(){$('.actions .info').fadeOut();}, 2000);
+      clearTimeout(soundInfoTimer);
+      soundInfoTimer = setTimeout(function(){$('.actions .info').fadeOut();}, 2000);
     }
 
-    if (playingSounds) {
+    if (State.playingSounds) {
       $('.unMute').hide();
       $('.mute').show();
     }else{
@@ -75,15 +69,13 @@ $(document).ready(function () {
     }
   }
 
-  function doRest(period){
-    playSound('rest');
-    period = period || rest;
+  function getReadyForNextExercise() {
     var element = $('.drills li.active');
     var index = $('.drills li').index(element);
     nextExercise = (index + 1) % $('.drills li').length;
 
     if (element.hasClass('last')) {
-      rounds++;
+      State.rounds++;
       showRoundStatus();
     }
 
@@ -93,7 +85,12 @@ $(document).ready(function () {
     if (nextExercise > 2) {
       turnAround();
     }
+  }
 
+  function doRest(period){
+    playSound('rest');
+    period = period || Config.rest;
+    getReadyForNextExercise();
     workoutTimer = setTimeout(go, (period*1000));
   }
 
@@ -109,160 +106,49 @@ $(document).ready(function () {
     var element = $('.drills li.next');
     $('.drills li').removeClass('next');
     element.addClass('active');
-    workoutTimer = setTimeout(doRest, (workout*1000));
-  }
-
-  function stop(e){
-    e.preventDefault();
-    running = false;
-    clearTimeout(workoutTimer);
-    $('.stop').hide();
-    $('.start').show();
-    $('.share').show();
-    $('.drills li').removeClass('next');
-    $('.drills li').removeClass('active');
-
-    reset();
-  }
-
-  function twitterText(){
-    return primerText() + ' ' + iDidItText();
-  }
-
-  function iDidItText(){
-    var text;
-    switch(rounds){
-      case 0:
-        text = 'I didn\'t do it. Yet.';
-        break;
-      case 1:
-        text = 'I just did it.';
-        break;
-      case 2:
-        text = 'I just did it. Twice!';
-        break;
-      default:
-        text = 'I just did it. '+ rounds + ' times!';
-        break;
-    }
-    return text;
-  }
-  function primerText(){
-    return 'It\'s very tough and you really get to sweat.';
-  }
-
-  function roundsText(){
-    switch(rounds){
-      case 1:
-        return '1 round';
-      default:
-        return rounds+' rounds';
-    }
-  }
-
-  function showModal(id) {
-    $('.js-rounds').html(roundsText());
-    $(id).modal();
-  }
-
-  function promptForFacebookThing(){
-    if (facebookConnected) {
-      showModal('#facebookPostModal');
-    }else{
-      showModal('#facebookConnectModal');
-    }
+    workoutTimer = setTimeout(doRest, (Config.workout*1000));
   }
 
   function bind(){
-    $('.start').on('click', function(e){
-      e.preventDefault();
-      start();
-    });
-    $('.share.twitter').on('click', function(e) {
-      e.preventDefault();
-      window.open('http://twitter.com/share?text='+twitterText(), 'Share your workout', 'height=250,width=550');
-    });
-    $('.share.facebook').on('click', function(e) {
-      e.preventDefault();
-      promptForFacebookThing();
-    });
+    $('.start').on('click', start);
     $('.stop').on('click', stop);
-
     $('.mute').on('click', mute);
     $('.unMute').on('click', unMute);
 
     $(document).keyup(function(evt) {
-      evt.preventDefault();
       var focused = $(':focus');
       if (evt.keyCode == 32 && !focused.is("li")) {
-        if (running) {
+        if (State.running) {
           stop(evt);
         }else{
-          start();
+          start(evt);
         }
       }
-    });
-
-    $('li').keyup(function(evt) {
-      evt.preventDefault();
     });
 
     $('.credits h3').on('click', function(e){
       $('.credits p').toggle();
     });
-
-    $('.js-connect-to-facebook').on('click', connectToFacebookAndPost);
-    $('.js-post-activity').on('click', postToFacebook);
   }
 
-  function connectToFacebookAndPost(){
-    FB.login(function(response){
-      if (response.status === 'connected') {
-        showModal('#facebookPostModal');
-      }else{
-        showModal('#facebookConnectModal');
-      }
-    }, {scope: 'publish_actions'});
-  }
-
-  function postToFacebook(){
-    FB.api(
-      'me/scientificseven:complete',
-      'post',
-      {
-        workout: 'http://thescientificsevenminuteworkout.com/workouts/'+rounds+'.html'
-      },
-      function(response) {
-        if (response.error) {
-          window.console.log(response);
-          showModal('#facebookConnectModal');
-        }else{
-          window.console.log(response);
-          var activityId = response.id;
-          var activityUrl = 'https://www.facebook.com/me/activity/'+activityId
-          $('.js-facebook-activity-link').attr('href', activityUrl);
-          showModal('#facebookSuccessModal');
-        }
-      }
-    );
-  }
-
-  var firstElement = $('.drills li.first');
-
-  function reset(){
+  
+  function resetList(){
+    $('.drills li').removeClass('next');
+    $('.drills li').removeClass('active');
     var all = $('.drills li');
+    var firstElement = $('.drills li.first');
     if (all.index(firstElement) !== 0) {
       turnAround();
-      reset();
+      resetList();
     }
   }
 
   function playSound(type){
-    if (playingSounds) {
+    if (State.playingSounds) {
       if (type === 'rest') {
-        bell.play();
+        Sounds.play('bell');
       }else{
-        horn.play();
+        Sounds.play('horn');
       }
     }
   }

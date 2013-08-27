@@ -127,6 +127,9 @@ Make sure contenteditable will not fuck up text size
   .actions div {
     float:left;
   }
+  .credits {
+    display: none;
+  }
 }
  
 /* Landscape phones and down */
