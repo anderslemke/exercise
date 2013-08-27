@@ -1,3 +1,18 @@
+var bell;
+var horn;
+
+soundManager.setup({
+  url: '/assets/soundmanager2/swf/',
+  onready: function() {
+    bell = soundManager.createSound({
+     url: '/assets/sounds/bell.mp3'
+    });
+    horn = soundManager.createSound({
+     url: '/assets/sounds/horn.mp3'
+    });
+  }
+});
+
 $(document).ready(function () {
   var workout = 30,
   rest = 10;
@@ -250,18 +265,16 @@ $(document).ready(function () {
     }
   }
 
-  var bell;
-  var horn;
-
   function loadAndStart(){
-    loadedFiles = 0;
-    bell = new Audio('/assets/sounds/bell.mp3');
-    bell.addEventListener("canplaythrough", soundLoaded('bell'), !1);
-    bell.load();
+    start();
+    // loadedFiles = 0;
+    // bell = new Audio('/assets/sounds/bell.mp3');
+    // bell.addEventListener("canplaythrough", soundLoaded('bell'), !1);
+    // bell.load();
 
-    horn = new Audio('/assets/sounds/horn.mp3');
-    horn.addEventListener("canplaythrough", soundLoaded('horn'), !1);
-    horn.load();
+    // horn = new Audio('/assets/sounds/horn.mp3');
+    // horn.addEventListener("canplaythrough", soundLoaded('horn'), !1);
+    // horn.load();
   }
 
   function playSound(type){
