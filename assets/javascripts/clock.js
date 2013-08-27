@@ -176,7 +176,7 @@ $(document).ready(function () {
   function bind(){
     $('.start').on('click', function(e){
       e.preventDefault();
-      loadAndStart();
+      start();
     });
     $('.share.twitter').on('click', function(e) {
       e.preventDefault();
@@ -198,7 +198,7 @@ $(document).ready(function () {
         if (running) {
           stop(evt);
         }else{
-          loadAndStart();
+          start();
         }
       }
     });
@@ -255,26 +255,6 @@ $(document).ready(function () {
       turnAround();
       reset();
     }
-  }
-
-  var loadedFiles = 0;
-  function soundLoaded(type){
-    loadedFiles = loadedFiles + 1;
-    if (loadedFiles === 2) {
-      start();
-    }
-  }
-
-  function loadAndStart(){
-    start();
-    // loadedFiles = 0;
-    // bell = new Audio('/assets/sounds/bell.mp3');
-    // bell.addEventListener("canplaythrough", soundLoaded('bell'), !1);
-    // bell.load();
-
-    // horn = new Audio('/assets/sounds/horn.mp3');
-    // horn.addEventListener("canplaythrough", soundLoaded('horn'), !1);
-    // horn.load();
   }
 
   function playSound(type){
