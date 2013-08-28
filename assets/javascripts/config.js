@@ -1,5 +1,5 @@
 var Config = {
-  wait: 1,
-  workout: 1,
-  rest: 1
+  wait: 5,
+  workout: 30,
+  rest: 10
 }
