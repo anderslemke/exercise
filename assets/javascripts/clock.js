@@ -137,6 +137,7 @@ $(document).ready(function () {
     $(document).keyup(function(evt) {
       var focused = $(':focus');
       if (evt.keyCode == 32 && !focused.is("li")) {
+        ga('send', 'event', 'control', 'spaceUsed');
         if (State.running) {
           stop(evt);
         }else{
