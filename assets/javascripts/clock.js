@@ -21,7 +21,7 @@ $(document).ready(function () {
   function start(e){
     e.preventDefault();
     
-    ga('send', 'event', 'control', 'stop');
+    ga('send', 'event', 'control', 'start');
 
     State.rounds = 0;
     State.running = true;
