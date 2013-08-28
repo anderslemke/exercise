@@ -146,6 +146,7 @@ $(document).ready(function () {
     });
 
     $('.credits h3').on('click', function(e){
+      ga('send', 'event', 'credit', 'toggle');
       $('.credits p').toggle();
     });
   }
