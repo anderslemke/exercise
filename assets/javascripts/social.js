@@ -10,8 +10,10 @@ var SocialFactory = function(){
   function connectToFacebookAndPost(){
     FB.login(function(response){
       if (response.status === 'connected') {
+        ga('send', 'event', 'social', 'facebook', 'connectSuccess');
         showModal('#facebookPostModal');
       }else{
+        ga('send', 'event', 'social', 'facebook', 'connectFailure');
         showModal('#facebookConnectModal');
       }
     }, {scope: 'publish_actions'});
@@ -66,10 +68,10 @@ var SocialFactory = function(){
       },
       function(response) {
         if (response.error) {
-          window.console.log(response);
+          ga('send', 'event', 'social', 'facebook', 'postFailure');
           showModal('#facebookConnectModal');
         }else{
-          window.console.log(response);
+          ga('send', 'event', 'social', 'facebook', 'postSuccess');
           var activityId = response.id;
           var activityUrl = 'https://www.facebook.com/me/activity/'+activityId
           $('.js-facebook-activity-link').attr('href', activityUrl);
@@ -84,6 +86,7 @@ var SocialFactory = function(){
     $('.js-post-activity').on('click', postToFacebook);  
     $('.share.twitter').on('click', function(e) {
       e.preventDefault();
+      ga('send', 'event', 'social', 'twitter', 'postAttempt');
       window.open('http://twitter.com/share?text='+twitterText(), 'Share your workout', 'height=250,width=550');
     });
     $('.share.facebook').on('click', function(e) {

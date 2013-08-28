@@ -20,15 +20,19 @@ $(document).ready(function () {
 
   function start(e){
     e.preventDefault();
-  
+    
+    ga('send', 'event', 'control', 'stop');
+
     State.rounds = 0;
     State.running = true;
     renderButtons();
-    doRest(5);
+    doRest(Config.wait);
   }
 
   function stop(e){
     e.preventDefault();
+
+    ga('send', 'event', 'control', 'stop');
   
     State.running = false;
     renderButtons();
@@ -38,12 +42,18 @@ $(document).ready(function () {
 
   function mute(e){
     e.preventDefault();
+
+    ga('send', 'event', 'sound', 'mute');
+
     State.playingSounds = false;
     renderButtons(true);
   }
 
   function unMute(e){
     e.preventDefault();
+
+    ga('send', 'event', 'sound', 'unmute');
+
     State.playingSounds = true;
     renderButtons(true);
   }
@@ -74,8 +84,14 @@ $(document).ready(function () {
     var index = $('.drills li').index(element);
     nextExercise = (index + 1) % $('.drills li').length;
 
+    if (element && element.attr('id')) {
+      // I.e. don't track when getting ready for the first exercise
+      ga('send', 'event', 'exercise', 'rest', element.attr('id'));
+    };
+
     if (element.hasClass('last')) {
       State.rounds++;
+      ga('send', 'event', 'exercise', 'completedRound', State.rounds.toString());
       showRoundStatus();
     }
 
@@ -106,6 +122,9 @@ $(document).ready(function () {
     var element = $('.drills li.next');
     $('.drills li').removeClass('next');
     element.addClass('active');
+
+    ga('send', 'event', 'exercise', 'workout', element.attr('id'));
+
     workoutTimer = setTimeout(doRest, (Config.workout*1000));
   }
 
