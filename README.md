@@ -1,0 +1,1 @@
+Check out the Scientific Seven Minute Workout on [thescientificsevenminuteworkout.com](http://thescientificsevenminuteworkout.com).
