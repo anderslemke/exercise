@@ -6,6 +6,7 @@
   <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:700' rel='stylesheet' type='text/css'>
   <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
   <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/stylesheets/jquery-ui-1.10.3.custom.min.css">
   <!-- <link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
   <link href="/assets/stylesheets/rebootstrap.css" rel="stylesheet">
   <link href="/assets/stylesheets/style.css" rel="stylesheet">
@@ -78,6 +79,8 @@
 
           <div class="share facebook" data-toggle="tooltip" title="Share your workout"><i class="icon-facebook"></i></div>  
           <div class="share twitter" data-toggle="tooltip" title="Share your workout"><i class="icon-twitter"></i></div>  
+
+          <div class="save" data-toggle="tooltip" title="Save this workout"><i class="icon-save"></i></div>            
         </div>
       </div> 
 
@@ -173,7 +176,28 @@
     </div>
   </div>
 
+  <div class="modal hide js-load-or-save-modal">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3>Load or save workout</h3>
+    </div>
+    <div class="modal-body">
+      <p>
+        Write the name of the workout you want to load or save:
+      </p>
+      <p>
+        <input type="text" id="name-of-workout">
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn js-do-save">Save workout</button>
+      <button class="btn js-do-load">Load workout</button>
+    </div>
+  </div>
+
   <script src="/assets/javascripts/jquery.js"></script>
+  <script src="/assets/javascripts/jquery-ui-1.10.3.custom.min.js"></script>
+  <script src="/assets/javascripts/lodash.js"></script>
   
   <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <!-- 
@@ -183,5 +207,6 @@
   <script src="/assets/javascripts/state.js"></script>
   <script src="/assets/javascripts/social.js"></script>
   <script src="/assets/javascripts/clock.js"></script>
+  <script src="/assets/javascripts/workouts.js"></script>
 </body>
 </html>

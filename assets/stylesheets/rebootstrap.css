@@ -10,6 +10,10 @@
   border:0;
 }
 
+.modal-body {
+  overflow:visible;
+}
+
 .btn {
   background-image:none;
 }
